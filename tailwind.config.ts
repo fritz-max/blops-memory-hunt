@@ -27,7 +27,7 @@ export default {
 				foreground: 'hsl(var(--foreground))',
                 // Custom colors for our game with red focus
                 blops: {
-                    red: '#FFCCCF', // More prominent red
+                    red: '#ea384c', // More prominent red
                     blue: '#5F7FFF', // Keep blue for contrast
                     purple: '#A35FFF',
                     pink: '#FFD9E2', // Lighter pink

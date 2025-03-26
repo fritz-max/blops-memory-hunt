@@ -20,7 +20,7 @@ const MemoryCard: React.FC<MemoryCardProps> = ({ card, onClick, disabled }) => {
   // Get the appropriate icon based on the card's pair ID
   const iconName = getCardIcon(card.pairId);
   
-  // Fix: Type-safe way to get the icon component
+  // Type-safe way to get the icon component
   const IconComponent = iconName in LucideIcons 
     ? LucideIcons[iconName as keyof typeof LucideIcons] 
     : LucideIcons.HelpCircle;
