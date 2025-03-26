@@ -25,16 +25,25 @@ export default {
 				ring: 'hsl(var(--ring))',
 				background: 'hsl(var(--background))',
 				foreground: 'hsl(var(--foreground))',
-                // Custom colors for our game
+                // Custom colors for our game with red focus
                 blops: {
-                    red: '#FF5F5F',
-                    blue: '#5F7FFF',
+                    red: '#FFCCCF', // More prominent red
+                    blue: '#5F7FFF', // Keep blue for contrast
                     purple: '#A35FFF',
-                    pink: '#FF5FA3',
-                    yellow: '#FFD15F',
+                    pink: '#FFD9E2', // Lighter pink
+                    yellow: '#FFE7C7', // Slightly warmer
                     green: '#5FFF8F',
-                    light: '#F5F8FF',
+                    light: '#FFF0F0', // Light red background
                     dark: '#2A3147'
+                },
+                // New game colors with a red focus
+                game: {
+                    'platelet': '#FFE7C7',
+                    'blood': '#FFCCCF',
+                    'protein': '#F2E6E2',
+                    'antibody': '#E9D9D8',
+                    'virus': '#E5D1D0',
+                    'background': '#FFF0F0'
                 },
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
@@ -109,6 +118,18 @@ export default {
 					'0%': { transform: 'scale(0.95)', opacity: '0' },
 					'70%': { transform: 'scale(1.05)', opacity: '1' },
 					'100%': { transform: 'scale(1)', opacity: '1' }
+				},
+				'pulse-soft': {
+					'0%, 100%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(1.05)' }
+				},
+				'float': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'bounce-soft': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' }
 				}
 			},
 			animation: {
@@ -118,7 +139,10 @@ export default {
 				'card-flip-back': 'card-flip-back 0.5s ease-out forwards',
 				'card-match': 'card-match 0.6s ease-in-out',
 				'fade-in': 'fade-in 0.5s ease-out',
-				'bounce-in': 'bounce-in 0.5s ease-out'
+				'bounce-in': 'bounce-in 0.5s ease-out',
+				'pulse-soft': 'pulse-soft 2s infinite ease-in-out',
+				'float': 'float 3s infinite ease-in-out',
+				'bounce-soft': 'bounce-soft 2s infinite ease-in-out'
 			}
 		}
 	},

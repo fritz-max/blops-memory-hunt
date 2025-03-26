@@ -76,16 +76,16 @@ export function getCardIcon(pairId: number) {
 // Get color for a card based on its pair ID
 export function getCardColor(pairId: number) {
   switch (pairId) {
-    case 1: return "text-yellow-500";
-    case 2: return "text-red-500";
-    case 3: return "text-blue-400";
-    case 4: return "text-purple-500";
-    case 5: return "text-red-600";
-    case 6: return "text-blue-600";
-    case 7: return "text-indigo-500";
-    case 8: return "text-green-500";
-    case 9: return "text-cyan-600";
-    case 10: return "text-sky-500";
+    case 1: return "text-game-platelet"; // Trombocyt
+    case 2: return "text-game-blood"; // Rødt blodlegeme
+    case 3: return "text-blue-400"; // Hvidt blodlegeme
+    case 4: return "text-purple-500"; // Virus
+    case 5: return "text-red-500"; // Petikkier
+    case 6: return "text-blue-600"; // Blodåre
+    case 7: return "text-indigo-500"; // Blåt mærke
+    case 8: return "text-green-500"; // Plaster
+    case 9: return "text-game-protein"; // Læge
+    case 10: return "text-game-antibody"; // Hospital
     default: return "text-gray-500";
   }
 }
