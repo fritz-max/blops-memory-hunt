@@ -20,10 +20,16 @@ const MemoryCard: React.FC<MemoryCardProps> = ({ card, onClick, disabled }) => {
   // Get the appropriate icon based on the card's pair ID
   const iconName = getCardIcon(card.pairId);
   
-  // Type-safe way to get the icon component
-  const IconComponent = iconName in LucideIcons 
-    ? LucideIcons[iconName as keyof typeof LucideIcons] 
-    : LucideIcons.HelpCircle;
+  // Create a type-safe way to access the icon component
+  type IconKey = keyof typeof LucideIcons;
+  
+  // Make sure iconName is a valid key in LucideIcons
+  const validIconName = (LucideIcons[iconName as IconKey] !== undefined) 
+    ? iconName as IconKey 
+    : 'HelpCircle' as IconKey;
+    
+  // Get the specific icon component  
+  const Icon = LucideIcons[validIconName];
     
   const iconColor = getCardColor(card.pairId);
 
@@ -44,7 +50,7 @@ const MemoryCard: React.FC<MemoryCardProps> = ({ card, onClick, disabled }) => {
         {/* Card Back (Shown when flipped) */}
         <div className="flip-card-back rounded-2xl bg-white border-2 border-blops-red flex flex-col items-center justify-center p-2">
           <div className={`text-3xl sm:text-4xl mb-1 ${iconColor}`}>
-            <IconComponent strokeWidth={1.5} />
+            <Icon strokeWidth={1.5} />
           </div>
           <div className="text-xs sm:text-sm font-medium text-center text-blops-dark mt-1">
             {card.name}
