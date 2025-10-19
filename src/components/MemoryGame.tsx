@@ -146,18 +146,42 @@ const MemoryGame: React.FC = () => {
           </div>
         </>
       ) : (
-        <div className="flex flex-col items-center justify-center my-12">
-          <p className="text-xl mb-8 text-center max-w-md">
-            Find par af kort med blopperne, fibberne, fakkerne og de andre
-            figurer fra Silje, Ida og Antons ITP-univers.
-          </p>
-          <p className="text-xl mb-8 text-center max-w-md">God fornøjelse!</p>
-          <button
-            onClick={startGame}
-            className="game-button game-button-primary animate-bounce-in"
-          >
-            Start
-          </button>
+        <div className="fixed inset-0 flex items-center justify-center">
+          <div className="relative w-full max-w-2xl px-8">
+            {/* Decorative images positioned around the content */}
+            <img
+              src="/assets/vendespil_01.png"
+              alt="Characters"
+              className="absolute -top-32 -left-24 w-40 sm:w-52 animate-float opacity-95"
+            />
+            <img
+              src="/assets/vendespil_02.png"
+              alt="Detective"
+              className="absolute -top-28 -right-20 w-32 sm:w-44 animate-bounce-soft opacity-95"
+            />
+            <img
+              src="/assets/vendespil_04.png"
+              alt="Blops creatures"
+              className="absolute -bottom-32 left-1/2 -translate-x-1/2 w-60 sm:w-72 animate-pulse-soft opacity-95"
+            />
+
+            {/* Centered content */}
+            <div className="relative z-10 text-center bg-white/80 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-2xl border-4 border-purple-300">
+              <p className="text-xl sm:text-2xl mb-6 font-medium text-purple-800">
+                Find par af kort med blopperne, fibberne, fakkerne og de andre
+                figurer fra Silje, Ida og Antons ITP-univers.
+              </p>
+              <p className="text-2xl sm:text-3xl mb-8 font-bold text-pink-600">
+                God fornøjelse!
+              </p>
+              <button
+                onClick={startGame}
+                className="game-button game-button-primary animate-bounce-in text-xl sm:text-2xl px-12 py-4"
+              >
+                Start spillet
+              </button>
+            </div>
+          </div>
         </div>
       )}
 
