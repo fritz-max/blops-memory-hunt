@@ -4,22 +4,23 @@ export interface Card {
   id: number;
   pairId: number;
   name: string;
+  image: string;
   isFlipped: boolean;
   isMatched: boolean;
 }
 
 // Card data with Danish terms
 export const cardItems = [
-  { pairId: 1, name: "Trombocyt" },
-  { pairId: 2, name: "Rødt blodlegeme" },
-  { pairId: 3, name: "Hvidt blodlegeme" },
-  { pairId: 4, name: "Virus" },
-  { pairId: 5, name: "Petikkier" },
-  { pairId: 6, name: "Blodåre" },
-  { pairId: 7, name: "Blåt mærke" },
-  { pairId: 8, name: "Plaster" },
-  { pairId: 9, name: "Læge" },
-  { pairId: 10, name: "Hospital" },
+  { pairId: 1, name: "Trombocyt", image: "/assets/vendespil_01.png" },
+  { pairId: 2, name: "Rødt blodlegeme", image: "/assets/vendespil_02.png" },
+  { pairId: 3, name: "Hvidt blodlegeme", image: "/assets/vendespil_03.png" },
+  { pairId: 4, name: "Virus", image: "/assets/vendespil_04.png" },
+  { pairId: 5, name: "Petikkier", image: "/assets/vendespil_05.png" },
+  { pairId: 6, name: "Blodåre", image: "/assets/vendespil_06.png" },
+  { pairId: 7, name: "Blåt mærke", image: "/assets/vendespil_07.png" },
+  { pairId: 8, name: "Plaster", image: "/assets/vendespil_08.png" },
+  { pairId: 9, name: "Læge", image: "/assets/vendespil_09.png" },
+  { pairId: 10, name: "Hospital", image: "/assets/vendespil_10.png" },
 ];
 
 // Function to initialize a shuffled deck
@@ -30,18 +31,20 @@ export function initializeDeck(): Card[] {
       id: index,
       pairId: item.pairId,
       name: item.name,
+      image: item.image,
       isFlipped: false,
       isMatched: false,
     })),
     ...cardItems.map((item, index) => ({
       id: index + cardItems.length,
       pairId: item.pairId,
-      name: item.name, 
+      name: item.name,
+      image: item.image,
       isFlipped: false,
       isMatched: false,
     })),
   ];
-  
+
   // Shuffle the cards
   return shuffleArray(cards);
 }

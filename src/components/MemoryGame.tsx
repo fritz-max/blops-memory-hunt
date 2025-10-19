@@ -1,14 +1,13 @@
-
 import React, { useState, useEffect } from "react";
 import GameBoard from "./GameBoard";
 import GameOver from "./GameOver";
-import { 
-  Card, 
-  initializeDeck, 
-  playFlipSound, 
-  playMatchSound, 
-  playMismatchSound, 
-  playWinSound 
+import {
+  Card,
+  initializeDeck,
+  playFlipSound,
+  playMatchSound,
+  playMismatchSound,
+  playWinSound,
 } from "@/utils/gameUtils";
 
 const MemoryGame: React.FC = () => {
@@ -42,8 +41,8 @@ const MemoryGame: React.FC = () => {
     setFlippedCards(newFlippedCards);
 
     // Update the card state to show it's flipped
-    setCards(prevCards =>
-      prevCards.map(card =>
+    setCards((prevCards) =>
+      prevCards.map((card) =>
         card.id === id ? { ...card, isFlipped: true } : card
       )
     );
@@ -51,29 +50,29 @@ const MemoryGame: React.FC = () => {
     // Check for a match if two cards are flipped
     if (newFlippedCards.length === 2) {
       setIsChecking(true);
-      
+
       // Increment attempts counter
-      setAttempts(prev => prev + 1);
-      
+      setAttempts((prev) => prev + 1);
+
       const [firstId, secondId] = newFlippedCards;
-      const firstCard = cards.find(card => card.id === firstId);
-      const secondCard = cards.find(card => card.id === secondId);
-      
+      const firstCard = cards.find((card) => card.id === firstId);
+      const secondCard = cards.find((card) => card.id === secondId);
+
       if (firstCard && secondCard && firstCard.pairId === secondCard.pairId) {
         // It's a match!
         setTimeout(() => {
           playMatchSound();
-          setCards(prevCards =>
-            prevCards.map(card =>
+          setCards((prevCards) =>
+            prevCards.map((card) =>
               card.id === firstId || card.id === secondId
                 ? { ...card, isMatched: true }
                 : card
             )
           );
-          
+
           const newMatchedPairs = matchedPairs + 1;
           setMatchedPairs(newMatchedPairs);
-          
+
           // Check if all pairs are matched
           if (newMatchedPairs === 10) {
             setTimeout(() => {
@@ -81,7 +80,7 @@ const MemoryGame: React.FC = () => {
               setGameOver(true);
             }, 500);
           }
-          
+
           setFlippedCards([]);
           setIsChecking(false);
         }, 300);
@@ -89,8 +88,8 @@ const MemoryGame: React.FC = () => {
         // Not a match, flip the cards back
         setTimeout(() => {
           playMismatchSound();
-          setCards(prevCards =>
-            prevCards.map(card =>
+          setCards((prevCards) =>
+            prevCards.map((card) =>
               newFlippedCards.includes(card.id)
                 ? { ...card, isFlipped: false }
                 : card
@@ -111,13 +110,29 @@ const MemoryGame: React.FC = () => {
   return (
     <div className="game-container">
       {/* Sound effects (hidden) */}
-      <audio id="flip-sound" src="https://assets.soundon.fm/sounds/flip-card.mp3" preload="auto"></audio>
-      <audio id="match-sound" src="https://assets.soundon.fm/sounds/match.mp3" preload="auto"></audio>
-      <audio id="mismatch-sound" src="https://assets.soundon.fm/sounds/no-match.mp3" preload="auto"></audio>
-      <audio id="win-sound" src="https://assets.soundon.fm/sounds/win.mp3" preload="auto"></audio>
-      
+      <audio
+        id="flip-sound"
+        src="https://assets.soundon.fm/sounds/flip-card.mp3"
+        preload="auto"
+      ></audio>
+      <audio
+        id="match-sound"
+        src="https://assets.soundon.fm/sounds/match.mp3"
+        preload="auto"
+      ></audio>
+      <audio
+        id="mismatch-sound"
+        src="https://assets.soundon.fm/sounds/no-match.mp3"
+        preload="auto"
+      ></audio>
+      <audio
+        id="win-sound"
+        src="https://assets.soundon.fm/sounds/win.mp3"
+        preload="auto"
+      ></audio>
+
       <h1 className="game-title">Blops vendespil</h1>
-      
+
       {gameStarted ? (
         <>
           <p className="game-stats mb-6">Find to ens kort</p>
@@ -133,8 +148,10 @@ const MemoryGame: React.FC = () => {
       ) : (
         <div className="flex flex-col items-center justify-center my-12">
           <p className="text-xl mb-8 text-center max-w-md">
-            Find par af kort med elementer fra blodbanen. God fornøjelse!
+            Find par af kort med blopperne, fibberne, fakkerne og de andre
+            figurer fra Silje, Ida og Antons ITP-univers.
           </p>
+          <p className="text-xl mb-8 text-center max-w-md">God fornøjelse!</p>
           <button
             onClick={startGame}
             className="game-button game-button-primary animate-bounce-in"
@@ -143,10 +160,8 @@ const MemoryGame: React.FC = () => {
           </button>
         </div>
       )}
-      
-      {gameOver && (
-        <GameOver attempts={attempts} onRestart={handleRestart} />
-      )}
+
+      {gameOver && <GameOver attempts={attempts} onRestart={handleRestart} />}
     </div>
   );
 };
