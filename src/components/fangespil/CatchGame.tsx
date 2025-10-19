@@ -51,6 +51,16 @@ const CatchGame = () => {
     }
   };
 
+  // Get warning message based on lives remaining
+  const getWarningMessage = () => {
+    if (lives === 2) {
+      return "Pas på! Du har mistet en Blop. Du har to Blop-liv tilbage.";
+    } else if (lives === 1) {
+      return "Av! Du har én Blop tilbage! Vær ekstra forsigtig!";
+    }
+    return null;
+  };
+
   // Restart game
   const handleRestartClick = () => {
     resetGame();
@@ -101,7 +111,9 @@ const CatchGame = () => {
               </h1>
 
               <p className="text-center mb-6 text-lg sm:text-xl font-semibold text-purple-700">
-                Brug piletasterne eller touch for at styre
+                Hjælp Blop med at fange fakkerne og fibberne – og undgå at blive
+                ramt af løsslupne bolde! Brug piletasterne eller touch for at
+                styre
               </p>
 
               {/* Game instructions with images */}
@@ -189,6 +201,17 @@ const CatchGame = () => {
             score={score}
             difficulty={difficulty}
           />
+
+          {/* Warning message area - always reserve space */}
+          <div className="mt-4 text-center min-h-[80px] flex items-center justify-center">
+            {getWarningMessage() && (
+              <div className="bg-red-100 border-4 border-red-400 rounded-2xl p-4 animate-bounce-in w-full">
+                <p className="text-lg font-bold text-red-700">
+                  {getWarningMessage()}
+                </p>
+              </div>
+            )}
+          </div>
         </>
       )}
     </div>
