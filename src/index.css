@@ -3,7 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap');
 
 @layer base {
   :root {
@@ -52,9 +52,10 @@
   }
 
   body {
-    @apply bg-game-background text-blops-dark font-sans;
-    font-family: 'Quicksand', sans-serif;
+    @apply bg-gradient-to-br from-purple-200 via-pink-200 to-yellow-200 text-blops-dark font-sans;
+    font-family: 'Fredoka', sans-serif;
     overscroll-behavior: none;
+    min-height: 100vh;
   }
 
   /* Flip card styles */
@@ -105,8 +106,13 @@
   }
   
   .game-title {
-    @apply text-4xl font-bold text-center mb-6 text-blops-red;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    @apply text-5xl sm:text-6xl font-bold text-center mb-6;
+    background: linear-gradient(135deg, #FF6B9D 0%, #C239B3 50%, #4158D0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
   }
   
   .game-button {
@@ -115,8 +121,9 @@
   }
   
   .game-button-primary {
-    @apply bg-blops-red text-white 
-           hover:bg-red-400 focus:ring-red-400;
+    @apply bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white
+           hover:from-pink-600 hover:via-purple-600 hover:to-indigo-600
+           focus:ring-purple-400 transform hover:scale-105;
   }
   
   .game-stats {
@@ -136,8 +143,9 @@
   }
   
   .memory-card {
-    @apply aspect-square rounded-2xl shadow-md transition-all duration-300
-           hover:shadow-lg hover:scale-[1.02] active:scale-[0.98];
+    @apply aspect-square rounded-2xl shadow-lg transition-all duration-300
+           hover:shadow-2xl hover:scale-[1.05] active:scale-[0.95]
+           cursor-pointer;
   }
   
   .game-over-container {
