@@ -39,6 +39,11 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
     y: number;
     show: boolean;
   }>({ x: 0, y: 0, show: false });
+  const [lifeLostEffect, setLifeLostEffect] = useState<{
+    x: number;
+    y: number;
+    show: boolean;
+  }>({ x: 0, y: 0, show: false });
   const animationFrameRef = useRef<number>(0);
   const lastUpdateTimeRef = useRef<number>(0);
 
@@ -126,6 +131,16 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
               }, 800);
             } else {
               onLifeLost();
+              // Show life lost effect
+              setLifeLostEffect({
+                x: item.x,
+                y: item.y,
+                show: true,
+              });
+              // Hide life lost effect after animation
+              setTimeout(() => {
+                setLifeLostEffect((prev) => ({ ...prev, show: false }));
+              }, 800);
             }
             // Don't add to remaining items - it's been caught
           } else {
@@ -156,13 +171,13 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
     characterSize,
   ]);
 
-  // Keyboard controls - even faster movement for better responsiveness
+  // Keyboard controls - smaller steps for better precision
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
-        setCharacterPosition((prev) => Math.max(prev - 7, 0)); // Faster movement
+        setCharacterPosition((prev) => Math.max(prev - 3.5, 0)); // Smaller movement for precision
       } else if (e.key === "ArrowRight") {
-        setCharacterPosition((prev) => Math.min(prev + 7, 100)); // Faster movement
+        setCharacterPosition((prev) => Math.min(prev + 3.5, 100)); // Smaller movement for precision
       } else if (e.key === "p" || e.key === "P") {
         setIsPaused((prev) => !prev);
       }
@@ -204,35 +219,49 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
   return (
     <div
       ref={canvasRef}
-      className="relative w-full h-[50vh] md:h-[70vh] bg-game-background rounded-lg overflow-hidden shadow-lg"
+      className="relative w-full h-[50vh] md:h-[70vh] bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 rounded-2xl overflow-hidden shadow-xl border-4 border-purple-200"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
       {/* Score and lives display with animations */}
-      <div className="absolute top-4 left-4 z-30 font-bold bg-white/30 px-3 py-1 rounded-full backdrop-blur-sm transition-all duration-300 animate-pulse-soft">
-        Point: {score}
+      <div className="absolute top-4 left-4 z-30 font-bold bg-white/90 px-4 py-2 rounded-full backdrop-blur-sm transition-all duration-300 shadow-lg border-2 border-pink-300">
+        <span className="text-pink-600">Point:</span> <span className="text-purple-700">{score}</span>
       </div>
-      <div className="absolute top-4 right-4 z-30 font-bold flex bg-white/30 px-3 py-1 rounded-full backdrop-blur-sm">
-        Liv: {Array(lives).fill("❤️").join("")}
+      <div className="absolute top-4 right-4 z-30 font-bold flex bg-white/90 px-4 py-2 rounded-full backdrop-blur-sm shadow-lg border-2 border-pink-300">
+        <span className="text-pink-600 mr-2">Liv:</span> {Array(lives).fill("❤️").join("")}
       </div>
 
       {/* Score effect animation */}
       {scoreEffect.show && (
         <div
-          className="absolute z-40 font-bold text-primary animate-slide-out flex items-center"
+          className="absolute z-40 font-bold text-green-600 animate-slide-out flex items-center text-xl"
           style={{ left: `${scoreEffect.x}px`, top: `${scoreEffect.y}px` }}
         >
-          <Zap className="mr-1 text-yellow-400" size={16} />
+          <Zap className="mr-1 text-yellow-400" size={20} />
           +1
+        </div>
+      )}
+
+      {/* Life lost effect animation */}
+      {lifeLostEffect.show && (
+        <div
+          className="absolute z-40 font-bold text-red-600 animate-slide-out flex items-center text-xl"
+          style={{ left: `${lifeLostEffect.x}px`, top: `${lifeLostEffect.y}px` }}
+        >
+          <span className="text-2xl mr-1">💔</span>
+          -1 Liv
         </div>
       )}
 
       {/* Pause overlay */}
       {isPaused && (
-        <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-50 animate-fade-in">
-          <div className="text-white text-xl font-bold p-6 bg-black/60 rounded-lg animate-pulse-soft">
-            Spillet er sat på pause
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
+          <div className="bg-white/90 rounded-3xl p-8 shadow-2xl border-4 border-purple-300 animate-pulse-soft">
+            <p className="text-2xl font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+              Spillet er sat på pause
+            </p>
+            <p className="text-sm text-purple-600 mt-2">Tryk 'P' for at fortsætte</p>
           </div>
         </div>
       )}

@@ -1,8 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import GameCanvas from "@/components/fangespil/GameCanvas";
 import GameOverScreen from "@/components/fangespil/GameOverScreen";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
 import { Progress } from "@/components/ui/progress";
 import { Sparkles } from "lucide-react";
 
@@ -13,7 +11,6 @@ const CatchGame = () => {
   const [gameOver, setGameOver] = useState(false);
   const [difficulty, setDifficulty] = useState(1.2); // Start with higher difficulty
   const gameRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
 
   // Reset game state
   const resetGame = () => {
@@ -27,14 +24,6 @@ const CatchGame = () => {
   const startGame = () => {
     resetGame();
     setGameStarted(true);
-
-    // Welcome toast
-    toast({
-      title: "Velkommen til Blop!",
-      description:
-        "Fang de røde blodlegemer og proteiner. Undgå virus og antistoffer!",
-      duration: 4000,
-    });
   };
 
   // Handle score updates
@@ -42,40 +31,8 @@ const CatchGame = () => {
     const newScore = score + points;
     setScore(newScore);
 
-    // Special achievement toasts
-    if (newScore === 10) {
-      toast({
-        title: "Godt klaret!",
-        description: "Du har fået 10 point!",
-        duration: 3000,
-      });
-    } else if (newScore === 25) {
-      toast({
-        title: "Fantastisk!",
-        description: "Du har fået 25 point!",
-        duration: 3000,
-      });
-    } else if (newScore === 50) {
-      toast({
-        title: "Utroligt!",
-        description: "Halvvejs til sejren!",
-        duration: 3000,
-      });
-    } else if (newScore === 75) {
-      toast({
-        title: "Næsten der!",
-        description: "Bare 25 point mere!",
-        duration: 3000,
-      });
-    }
-
     // Win condition
     if (newScore >= 100) {
-      toast({
-        title: "Tillykke!",
-        description: "Du har vundet spillet med 100 point!",
-        duration: 5000,
-      });
       setGameOver(true);
     }
 
@@ -87,23 +44,6 @@ const CatchGame = () => {
   const handleLifeLost = () => {
     const newLives = lives - 1;
     setLives(newLives);
-
-    // Warning toasts
-    if (newLives === 2) {
-      toast({
-        title: "Pas på!",
-        description: "Du har mistet et liv! To liv tilbage.",
-        duration: 3000,
-        variant: "destructive",
-      });
-    } else if (newLives === 1) {
-      toast({
-        title: "Forsigtig!",
-        description: "Sidste liv! Vær ekstra forsigtig!",
-        duration: 3000,
-        variant: "destructive",
-      });
-    }
 
     // Game over condition
     if (newLives <= 0) {
@@ -121,36 +61,125 @@ const CatchGame = () => {
 
   return (
     <div
-      className="relative flex flex-col items-center justify-center w-full max-w-5xl w-full h-full glass-panel rounded-xl p-4 shadow-xl animate-fade-in"
+      className="relative flex flex-col items-center justify-center w-full max-w-5xl w-full h-full "
       ref={gameRef}
     >
       {!gameStarted ? (
-        <div className="flex flex-col items-center justify-center w-full h-full min-h-[50vh] md:min-h-[70vh]">
-          <h1 className="text-4xl font-bold mb-8 text-primary animate-pulse-soft flex items-center">
-            <Sparkles className="mr-2 text-yellow-400 animate-spin-slow" />
-            Blop
-            <Sparkles className="ml-2 text-yellow-400 animate-spin-slow" />
-          </h1>
-          <p className="text-center mb-8 text-lg">
-            Fang røde blodlegemer og proteiner. Undgå antistoffer og virus.
-          </p>
-          <Button
-            onClick={startGame}
-            className="game-button text-lg animate-pulse-soft"
-          >
-            Start
-          </Button>
+        <div className="fixed inset-0 flex items-center justify-center p-4">
+          <div className="relative w-full max-w-3xl">
+            {/* Decorative images positioned around the content */}
+            <img
+              src="/assets/catch/fang_1.png"
+              alt="Good item"
+              className="absolute -top-24 -left-16 w-32 sm:w-40 animate-float opacity-95"
+            />
+            <img
+              src="/assets/catch/fang_2.png"
+              alt="Good item"
+              className="absolute -top-20 -right-12 w-28 sm:w-36 animate-bounce-soft opacity-95"
+            />
+            <img
+              src="/assets/catch/undgå_1.png"
+              alt="Bad item"
+              className="absolute -bottom-24 -left-12 w-28 sm:w-36 animate-pulse-soft opacity-95"
+            />
+            <img
+              src="/assets/catch/undgå_2.png"
+              alt="Bad item"
+              className="absolute -bottom-20 -right-16 w-32 sm:w-40 animate-float opacity-95"
+            />
+            <img
+              src="/assets/catch/user_blop_1.png"
+              alt="Hero"
+              className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-24 sm:w-32 animate-bounce-soft opacity-95"
+            />
+
+            {/* Centered content */}
+            <div className="relative z-10 bg-white/90 backdrop-blur-sm rounded-3xl p-6 sm:p-10 shadow-2xl border-4 border-purple-300">
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6 text-center bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                Blops Fangespil
+              </h1>
+
+              <p className="text-center mb-6 text-lg sm:text-xl font-semibold text-purple-700">
+                Brug piletasterne eller touch for at styre
+              </p>
+
+              {/* Game instructions with images */}
+              <div className="mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Items to catch */}
+                  <div className="bg-green-100 border-4 border-green-400 rounded-2xl p-4">
+                    <h3 className="text-lg font-bold text-green-700 mb-3 text-center">
+                      ✓ Fang disse!
+                    </h3>
+                    <div className="flex justify-center gap-4 mb-2">
+                      <img
+                        src="/assets/catch/fang_1.png"
+                        alt="Røde blodlegemer"
+                        className="w-14 h-14 object-contain"
+                      />
+                      <img
+                        src="/assets/catch/fang_2.png"
+                        alt="Proteiner"
+                        className="w-14 h-14 object-contain"
+                      />
+                    </div>
+                    <p className="text-sm text-center text-green-800 font-medium">
+                      Røde blodlegemer og proteiner
+                    </p>
+                  </div>
+
+                  {/* Items to avoid */}
+                  <div className="bg-red-100 border-4 border-red-400 rounded-2xl p-4">
+                    <h3 className="text-lg font-bold text-red-700 mb-3 text-center">
+                      ✗ Undgå disse!
+                    </h3>
+                    <div className="flex justify-center gap-4 mb-2">
+                      <img
+                        src="/assets/catch/undgå_1.png"
+                        alt="Antistoffer"
+                        className="w-14 h-14 object-contain"
+                      />
+                      <img
+                        src="/assets/catch/undgå_2.png"
+                        alt="Virus"
+                        className="w-14 h-14 object-contain"
+                      />
+                    </div>
+                    <p className="text-sm text-center text-red-800 font-medium">
+                      Antistoffer og virus
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <button
+                  onClick={startGame}
+                  className="game-button game-button-primary text-xl sm:text-2xl px-12 py-4 animate-bounce-in"
+                >
+                  Start spillet
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       ) : gameOver ? (
         <GameOverScreen score={score} onRestart={handleRestartClick} />
       ) : (
         <>
-          <div className="w-full mb-2">
-            <div className="flex justify-between items-center mb-1">
-              <span className="text-xs font-medium">0</span>
-              <span className="text-xs font-medium">100</span>
+          <div className="w-full mb-4">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm font-bold text-purple-700">0</span>
+              <span className="text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
+                Mål: 100 point
+              </span>
+              <span className="text-sm font-bold text-purple-700">100</span>
             </div>
-            <Progress value={progressPercentage} className="h-2" />
+            <Progress
+              value={progressPercentage}
+              className="h-3 bg-purple-200"
+            />
           </div>
 
           <GameCanvas

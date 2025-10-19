@@ -9,6 +9,7 @@ export interface FallingItem {
   speed: number;
   width: number;
   height: number;
+  image: string;
 }
 
 export const isGoodItem = (type: ItemType): boolean => {
@@ -28,6 +29,19 @@ export const getItemName = (type: ItemType): string => {
   }
 };
 
+export const getItemImage = (type: ItemType): string => {
+  switch (type) {
+    case 'blood':
+      return '/assets/catch/fang_1.png';
+    case 'protein':
+      return '/assets/catch/fang_2.png';
+    case 'antibody':
+      return '/assets/catch/undgå_1.png';
+    case 'virus':
+      return '/assets/catch/undgå_2.png';
+  }
+};
+
 export const getItemColor = (type: ItemType): string => {
   switch (type) {
     case 'blood':
@@ -44,21 +58,21 @@ export const getItemColor = (type: ItemType): string => {
 export const generateRandomItem = (canvasWidth: number, score: number): FallingItem => {
   const types: ItemType[] = ['blood', 'protein', 'antibody', 'virus'];
   const randomType = types[Math.floor(Math.random() * types.length)];
-  
+
   // Item size (smaller on mobile)
   const isMobile = window.innerWidth < 768;
   const itemWidth = isMobile ? 50 : 70;
   const itemHeight = isMobile ? 50 : 70;
-  
+
   // Ensure the item is fully within the canvas boundaries
   const maxX = canvasWidth - itemWidth;
   const randomX = Math.floor(Math.random() * maxX);
-  
+
   // Calculate speed based on score
   const baseSpeed = 1;
   const speedMultiplier = 0.05;
   const speed = baseSpeed + (score * speedMultiplier);
-  
+
   return {
     id: Math.random().toString(36).substring(2, 9),
     type: randomType,
@@ -66,7 +80,8 @@ export const generateRandomItem = (canvasWidth: number, score: number): FallingI
     y: -itemHeight, // Start above the canvas
     speed,
     width: itemWidth,
-    height: itemHeight
+    height: itemHeight,
+    image: getItemImage(randomType)
   };
 };
 

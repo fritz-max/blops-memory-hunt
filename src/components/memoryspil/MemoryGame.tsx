@@ -131,10 +131,9 @@ const MemoryGame: React.FC = () => {
         preload="auto"
       ></audio>
 
-      <h1 className="game-title">Blops vendespil</h1>
-
       {gameStarted ? (
         <>
+          <h1 className="game-title">Blops vendespil</h1>
           <p className="game-stats mb-6">Find to ens kort</p>
           <p className="game-stats">Antal forsøg: {attempts}</p>
           <div className="my-6">
@@ -167,6 +166,9 @@ const MemoryGame: React.FC = () => {
 
             {/* Centered content */}
             <div className="relative z-10 text-center bg-white/80 backdrop-blur-sm rounded-3xl p-8 sm:p-12 shadow-2xl border-4 border-purple-300">
+              <h1 className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent">
+                Blops vendespil
+              </h1>
               <p className="text-xl sm:text-2xl mb-6 font-medium text-purple-800">
                 Find par af kort med blopperne, fibberne, fakkerne og de andre
                 figurer fra Silje, Ida og Antons ITP-univers.
