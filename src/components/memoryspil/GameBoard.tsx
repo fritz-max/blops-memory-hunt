@@ -1,7 +1,6 @@
-
 import React from "react";
 import MemoryCard from "./MemoryCard";
-import { Card } from "@/utils/gameUtils";
+import { Card } from "@/utils/memoryGameUtils";
 
 interface GameBoardProps {
   cards: Card[];
@@ -9,7 +8,11 @@ interface GameBoardProps {
   disabled: boolean;
 }
 
-const GameBoard: React.FC<GameBoardProps> = ({ cards, onCardClick, disabled }) => {
+const GameBoard: React.FC<GameBoardProps> = ({
+  cards,
+  onCardClick,
+  disabled,
+}) => {
   return (
     <div className="memory-grid">
       {cards.map((card) => (

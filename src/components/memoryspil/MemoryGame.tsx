@@ -8,7 +8,7 @@ import {
   playMatchSound,
   playMismatchSound,
   playWinSound,
-} from "@/utils/gameUtils";
+} from "@/utils/memoryGameUtils";
 
 const MemoryGame: React.FC = () => {
   const [cards, setCards] = useState<Card[]>([]);

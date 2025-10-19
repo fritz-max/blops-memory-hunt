@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "@/utils/gameUtils";
+import { Card } from "@/utils/memoryGameUtils";
 
 interface MemoryCardProps {
   card: Card;
