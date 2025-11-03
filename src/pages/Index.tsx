@@ -53,6 +53,59 @@ const Index = () => {
               Fangespil
             </Link>
           </div>
+
+          {/* Credits */}
+          <div className="mt-10">
+            <div className="flex justify-center items-start gap-8 flex-wrap">
+              <div className="flex flex-col items-center gap-2">
+                <a
+                  href="https://www.bloderforeningen.dk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="/assets/logos/bloderforeningen-logo.png"
+                    alt="Bloderforeningen"
+                    className="h-8 opacity-70 hover:opacity-100 transition-opacity"
+                  />
+                </a>
+                <p className="text-sm font-medium text-purple-700">Udgivelse</p>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <a
+                  href="https://www.caretoons.dk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="/assets/logos/caretoons-logo.png"
+                    alt="CareToons"
+                    className="h-8 opacity-70 hover:opacity-100 transition-opacity"
+                  />
+                </a>
+                <p className="text-sm font-medium text-purple-700">Udvikling</p>
+              </div>
+              <div className="flex flex-col items-center gap-2">
+                <a
+                  href="https://www.zarahjuul.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <img
+                    src="/assets/logos/zarahjuul-logo.webp"
+                    alt="Zarah Juul"
+                    className="h-8 opacity-70 hover:opacity-100 transition-opacity"
+                  />
+                </a>
+                <p className="text-sm font-medium text-purple-700">
+                  Illustration
+                </p>
+              </div>
+            </div>
+            <p className="text-xs text-purple-600 text-center mt-6">
+              Programmering: Fritz Dörmann
+            </p>
+          </div>
         </div>
       </div>
     </div>
