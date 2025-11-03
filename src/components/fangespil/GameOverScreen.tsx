@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface GameOverScreenProps {
   score: number;
@@ -24,9 +25,17 @@ const GameOverScreen: React.FC<GameOverScreenProps> = ({ score, onRestart }) => 
         Du fik <span className="font-bold text-2xl text-pink-600">{score}</span> point!
       </p>
 
-      <button onClick={onRestart} className="game-button game-button-primary text-xl sm:text-2xl px-12 py-4">
-        Spil igen
-      </button>
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <Link
+          to="/"
+          className="game-button bg-white/80 hover:bg-white/90 text-purple-700 text-xl sm:text-2xl px-12 py-4"
+        >
+          ← Tilbage
+        </Link>
+        <button onClick={onRestart} className="game-button game-button-primary text-xl sm:text-2xl px-12 py-4">
+          Spil igen
+        </button>
+      </div>
     </div>
   );
 };

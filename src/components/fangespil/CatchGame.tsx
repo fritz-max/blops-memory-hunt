@@ -72,7 +72,7 @@ const CatchGame = () => {
 
   return (
     <div
-      className="relative flex flex-col items-center justify-center w-full max-w-5xl w-full h-full "
+      className="relative flex flex-col items-center w-full max-w-5xl h-full"
       ref={gameRef}
     >
       {!gameStarted ? (
@@ -119,41 +119,41 @@ const CatchGame = () => {
 
               {/* Game instructions with images */}
               <div className="mb-8">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-3">
                   {/* Items to catch */}
-                  <div className="bg-green-100 border-4 border-green-400 rounded-2xl p-4">
-                    <h3 className="text-lg font-bold text-green-700 mb-3 text-center">
+                  <div className="bg-green-100 border-3 border-green-400 rounded-xl p-3">
+                    <h3 className="text-sm font-bold text-green-700 mb-2 text-center">
                       ✓ Fang disse!
                     </h3>
-                    <div className="flex justify-center gap-4 mb-2">
+                    <div className="flex justify-center gap-2">
                       <img
                         src="/assets/catch/fang_1.png"
                         alt="Røde blodlegemer"
-                        className="w-14 h-14 object-contain"
+                        className="w-10 h-10 object-contain"
                       />
                       <img
                         src="/assets/catch/fang_2.png"
                         alt="Proteiner"
-                        className="w-14 h-14 object-contain"
+                        className="w-10 h-10 object-contain"
                       />
                     </div>
                   </div>
 
                   {/* Items to avoid */}
-                  <div className="bg-red-100 border-4 border-red-400 rounded-2xl p-4">
-                    <h3 className="text-lg font-bold text-red-700 mb-3 text-center">
+                  <div className="bg-red-100 border-3 border-red-400 rounded-xl p-3">
+                    <h3 className="text-sm font-bold text-red-700 mb-2 text-center">
                       ✗ Undgå disse!
                     </h3>
-                    <div className="flex justify-center gap-4 mb-2">
+                    <div className="flex justify-center gap-2">
                       <img
                         src="/assets/catch/undgå_1.png"
                         alt="Antistoffer"
-                        className="w-14 h-14 object-contain"
+                        className="w-10 h-10 object-contain"
                       />
                       <img
                         src="/assets/catch/undgå_2.png"
                         alt="Virus"
-                        className="w-14 h-14 object-contain"
+                        className="w-10 h-10 object-contain"
                       />
                     </div>
                   </div>
@@ -185,7 +185,7 @@ const CatchGame = () => {
             <div className="flex items-center justify-between mb-2">
               <Link
                 to="/"
-                className="bg-white/80 backdrop-blur-sm hover:bg-white/90 text-purple-700 font-semibold px-4 py-2 rounded-lg shadow-lg transition-all hover:scale-105 text-sm"
+                className="text-purple-600 hover:text-purple-800 font-medium px-3 py-1 transition-all text-sm opacity-60 hover:opacity-100"
               >
                 ← Tilbage
               </Link>
@@ -212,7 +212,7 @@ const CatchGame = () => {
           />
 
           {/* Warning message area - always reserve space */}
-          <div className="mt-4 text-center min-h-[80px] flex items-center justify-center">
+          <div className="mt-4 text-center h-[80px] flex items-center justify-center flex-shrink-0">
             {getWarningMessage() && (
               <div className="bg-red-100 border-4 border-red-400 rounded-2xl p-4 animate-bounce-in w-full">
                 <p className="text-lg font-bold text-red-700">

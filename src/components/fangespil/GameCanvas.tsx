@@ -219,7 +219,7 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
   return (
     <div
       ref={canvasRef}
-      className="relative w-full h-[50vh] md:h-[70vh] bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 rounded-2xl overflow-hidden shadow-xl border-4 border-purple-200"
+      className="relative w-full h-[70vh] bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 rounded-2xl overflow-hidden shadow-xl border-4 border-purple-200"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}

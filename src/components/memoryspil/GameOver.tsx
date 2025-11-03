@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface GameOverProps {
   attempts: number;
@@ -20,12 +21,20 @@ const GameOver: React.FC<GameOverProps> = ({ attempts, onRestart }) => {
         <p className="text-lg text-center mb-6 text-blops-dark">
           Antal forsøg: <span className="font-bold text-2xl text-pink-600">{attempts}</span>
         </p>
-        <button
-          onClick={onRestart}
-          className="game-button game-button-primary"
-        >
-          Spil igen
-        </button>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <Link
+            to="/"
+            className="game-button bg-white/80 hover:bg-white/90 text-purple-700 text-xl sm:text-2xl px-12 py-4"
+          >
+            ← Tilbage
+          </Link>
+          <button
+            onClick={onRestart}
+            className="game-button game-button-primary"
+          >
+            Spil igen
+          </button>
+        </div>
       </div>
     </div>
   );
