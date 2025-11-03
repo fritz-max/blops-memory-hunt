@@ -1,5 +1,4 @@
-
-export type ItemType = 'blood' | 'protein' | 'antibody' | 'virus';
+export type ItemType = "blood" | "protein" | "antibody" | "virus";
 
 export interface FallingItem {
   id: string;
@@ -13,50 +12,53 @@ export interface FallingItem {
 }
 
 export const isGoodItem = (type: ItemType): boolean => {
-  return type === 'blood' || type === 'protein';
+  return type === "blood" || type === "protein";
 };
 
 export const getItemName = (type: ItemType): string => {
   switch (type) {
-    case 'blood':
-      return 'Røde blodlegemer';
-    case 'protein':
-      return 'Proteiner';
-    case 'antibody':
-      return 'Antistoffer';
-    case 'virus':
-      return 'Virus';
+    case "blood":
+      return "Røde blodlegemer";
+    case "protein":
+      return "Proteiner";
+    case "antibody":
+      return "Antistoffer";
+    case "virus":
+      return "Virus";
   }
 };
 
 export const getItemImage = (type: ItemType): string => {
   switch (type) {
-    case 'blood':
-      return '/assets/catch/fang_1.png';
-    case 'protein':
-      return '/assets/catch/fang_2.png';
-    case 'antibody':
-      return '/assets/catch/undgå_1.png';
-    case 'virus':
-      return '/assets/catch/undgå_2.png';
+    case "blood":
+      return "/assets/catch/fang_1.png";
+    case "protein":
+      return "/assets/catch/fang_2.png";
+    case "antibody":
+      return "/assets/catch/undgå_1.png";
+    case "virus":
+      return "/assets/catch/undgå_2.png";
   }
 };
 
 export const getItemColor = (type: ItemType): string => {
   switch (type) {
-    case 'blood':
-      return 'game-blood';
-    case 'protein':
-      return 'game-protein';
-    case 'antibody':
-      return 'game-antibody';
-    case 'virus':
-      return 'game-virus';
+    case "blood":
+      return "game-blood";
+    case "protein":
+      return "game-protein";
+    case "antibody":
+      return "game-antibody";
+    case "virus":
+      return "game-virus";
   }
 };
 
-export const generateRandomItem = (canvasWidth: number, score: number): FallingItem => {
-  const types: ItemType[] = ['blood', 'protein', 'antibody', 'virus'];
+export const generateRandomItem = (
+  canvasWidth: number,
+  score: number
+): FallingItem => {
+  const types: ItemType[] = ["blood", "protein", "antibody", "virus"];
   const randomType = types[Math.floor(Math.random() * types.length)];
 
   // Item size (smaller on mobile)
@@ -68,10 +70,10 @@ export const generateRandomItem = (canvasWidth: number, score: number): FallingI
   const maxX = canvasWidth - itemWidth;
   const randomX = Math.floor(Math.random() * maxX);
 
-  // Calculate speed based on score
-  const baseSpeed = 1;
-  const speedMultiplier = 0.05;
-  const speed = baseSpeed + (score * speedMultiplier);
+  // Calculate speed based on score - gentler for children
+  const baseSpeed = 0.9;
+  const speedMultiplier = 0.04;
+  const speed = baseSpeed + score * speedMultiplier;
 
   return {
     id: Math.random().toString(36).substring(2, 9),
@@ -81,13 +83,13 @@ export const generateRandomItem = (canvasWidth: number, score: number): FallingI
     speed,
     width: itemWidth,
     height: itemHeight,
-    image: getItemImage(randomType)
+    image: getItemImage(randomType),
   };
 };
 
 export const checkCollision = (
-  characterX: number, 
-  characterY: number, 
+  characterX: number,
+  characterY: number,
   characterWidth: number,
   item: FallingItem
 ): boolean => {

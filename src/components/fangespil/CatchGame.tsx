@@ -10,14 +10,14 @@ const CatchGame = () => {
   const [lives, setLives] = useState(3);
   const [gameStarted, setGameStarted] = useState(false);
   const [gameOver, setGameOver] = useState(false);
-  const [difficulty, setDifficulty] = useState(1.2); // Start with higher difficulty
+  const [difficulty, setDifficulty] = useState(0.9); // Start easier for children
   const gameRef = useRef<HTMLDivElement>(null);
 
   // Reset game state
   const resetGame = () => {
     setScore(0);
     setLives(3);
-    setDifficulty(1.2); // Higher starting difficulty
+    setDifficulty(0.9); // Easier starting difficulty
     setGameOver(false);
   };
 
@@ -37,8 +37,8 @@ const CatchGame = () => {
       setGameOver(true);
     }
 
-    // Increase difficulty based on score - more aggressive scaling
-    setDifficulty(1.2 + Math.floor(newScore / 8) * 0.25);
+    // Increase difficulty based on score - gentler scaling for children
+    setDifficulty(0.9 + Math.floor(newScore / 13) * 0.18);
   };
 
   // Handle life loss

@@ -33,6 +33,7 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
   const isMobile = useIsMobile();
   const characterSize = isMobile ? 60 : 80;
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [mouseDown, setMouseDown] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
   const [scoreEffect, setScoreEffect] = useState<{
     x: number;
@@ -75,7 +76,7 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
         const newItem = generateRandomItem(canvasSize.width, score);
         setFallingItems((prev) => [...prev, newItem]);
       }
-    }, 700 / difficulty); // Even faster spawn rate
+    }, 1000 / difficulty); // Slower spawn rate for children
 
     return () => clearInterval(itemInterval);
   }, [canvasSize.width, difficulty, score, isPaused]);
@@ -97,7 +98,7 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
       setFallingItems((prevItems) => {
         const updatedItems = prevItems.map((item) => ({
           ...item,
-          y: item.y + (item.speed * difficulty * 2 * deltaTime) / 16, // Adjusted for deltaTime
+          y: item.y + (item.speed * difficulty * 1.2 * deltaTime) / 16, // Slower speed for children
         }));
 
         // Check for collisions and remove items that went offscreen
@@ -212,6 +213,32 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
     setTouchStart(null);
   };
 
+  // Mouse controls - drag and drop
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setMouseDown(true);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!mouseDown) return;
+
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    const mouseX = e.clientX - rect.left;
+    const newPosition = (mouseX / canvasSize.width) * 100;
+
+    // Clamp position between 0 and 100
+    setCharacterPosition(Math.max(0, Math.min(100, newPosition)));
+  };
+
+  const handleMouseUp = () => {
+    setMouseDown(false);
+  };
+
+  const handleMouseLeave = () => {
+    setMouseDown(false);
+  };
+
   // Calculate the actual character position in pixels
   const characterPosX = (characterPosition / 100) * canvasSize.width;
   const characterPosY = canvasSize.height - characterSize / 2 - 10;
@@ -223,6 +250,10 @@ const GameCanvas: React.FC<GameCanvasProps> = ({
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Score and lives display with animations */}
       <div className="absolute top-4 left-4 z-30 font-bold bg-white/90 px-4 py-2 rounded-full backdrop-blur-sm transition-all duration-300 shadow-lg border-2 border-pink-300">
