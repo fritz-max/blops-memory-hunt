@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Link } from "react-router-dom";
 import GameCanvas from "@/components/fangespil/GameCanvas";
 import GameOverScreen from "@/components/fangespil/GameOverScreen";
 import { Progress } from "@/components/ui/progress";
@@ -136,9 +137,6 @@ const CatchGame = () => {
                         className="w-14 h-14 object-contain"
                       />
                     </div>
-                    <p className="text-sm text-center text-green-800 font-medium">
-                      Røde blodlegemer og proteiner
-                    </p>
                   </div>
 
                   {/* Items to avoid */}
@@ -158,14 +156,17 @@ const CatchGame = () => {
                         className="w-14 h-14 object-contain"
                       />
                     </div>
-                    <p className="text-sm text-center text-red-800 font-medium">
-                      Antistoffer og virus
-                    </p>
                   </div>
                 </div>
               </div>
 
-              <div className="text-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link
+                  to="/"
+                  className="game-button bg-white/80 hover:bg-white/90 text-purple-700 text-xl sm:text-2xl px-12 py-4"
+                >
+                  ← Tilbage
+                </Link>
                 <button
                   onClick={startGame}
                   className="game-button game-button-primary text-xl sm:text-2xl px-12 py-4 animate-bounce-in"
@@ -181,11 +182,19 @@ const CatchGame = () => {
       ) : (
         <>
           <div className="w-full mb-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-bold text-purple-700">0</span>
+            <div className="flex items-center justify-between mb-2">
+              <Link
+                to="/"
+                className="bg-white/80 backdrop-blur-sm hover:bg-white/90 text-purple-700 font-semibold px-4 py-2 rounded-lg shadow-lg transition-all hover:scale-105 text-sm"
+              >
+                ← Tilbage
+              </Link>
               <span className="text-lg font-bold bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">
                 Mål: 100 point
               </span>
+            </div>
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm font-bold text-purple-700">0</span>
               <span className="text-sm font-bold text-purple-700">100</span>
             </div>
             <Progress

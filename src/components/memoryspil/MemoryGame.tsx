@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import GameBoard from "./GameBoard";
 import GameOver from "./GameOver";
 import {
@@ -134,8 +135,17 @@ const MemoryGame: React.FC = () => {
       {gameStarted ? (
         <>
           <h1 className="game-title">Blops vendespil</h1>
-          <p className="game-stats mb-6">Find to ens kort</p>
-          <p className="game-stats">Antal forsøg: {attempts}</p>
+          <div className="flex flex-col items-center">
+            <div className="flex items-center justify-center w-fit gap-4 mb-6">
+              <Link
+                to="/"
+                className="bg-white/80 backdrop-blur-sm hover:bg-white/90 text-purple-700 font-semibold px-4 py-2 rounded-lg shadow-lg transition-all hover:scale-105 text-sm"
+              >
+                ← Tilbage
+              </Link>
+              <p className="game-stats">Antal forsøg: {attempts}</p>
+            </div>
+          </div>
           <div className="my-6">
             <GameBoard
               cards={cards}
@@ -176,12 +186,20 @@ const MemoryGame: React.FC = () => {
               <p className="text-2xl sm:text-3xl mb-8 font-bold text-pink-600">
                 God fornøjelse!
               </p>
-              <button
-                onClick={startGame}
-                className="game-button game-button-primary animate-bounce-in text-xl sm:text-2xl px-12 py-4"
-              >
-                Start spillet
-              </button>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link
+                  to="/"
+                  className="game-button bg-white/80 hover:bg-white/90 text-purple-700 text-xl sm:text-2xl px-12 py-4"
+                >
+                  ← Tilbage
+                </Link>
+                <button
+                  onClick={startGame}
+                  className="game-button game-button-primary animate-bounce-in text-xl sm:text-2xl px-12 py-4"
+                >
+                  Start spillet
+                </button>
+              </div>
             </div>
           </div>
         </div>
