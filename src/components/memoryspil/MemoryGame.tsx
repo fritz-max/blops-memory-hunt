@@ -134,9 +134,8 @@ const MemoryGame: React.FC = () => {
 
       {gameStarted ? (
         <>
-          <h1 className="game-title">Blops vendespil</h1>
           <div className="flex flex-col items-center">
-            <div className="flex items-center justify-center w-fit gap-4 mb-6">
+            <div className="flex items-center justify-between w-full gap-4 mb-6">
               <Link
                 to="/"
                 className="text-purple-600 hover:text-purple-800 font-medium px-3 py-1 transition-all text-sm opacity-60 hover:opacity-100"
